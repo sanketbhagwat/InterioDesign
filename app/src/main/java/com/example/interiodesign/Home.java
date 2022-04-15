@@ -2,6 +2,7 @@ package com.example.interiodesign;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -19,12 +20,13 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
 
-        getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_container_home, new HomeFragment()).commit();
 
 //        getSupportActionBar().setTitle("InteriorDesign");
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomnavigationbar);
         bottomNavigationView.setBackground(null);
+        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_container_home, new HomeFragment()).commit();
+
 
         bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
             @Override
@@ -32,17 +34,22 @@ public class Home extends AppCompatActivity {
                 Fragment temp = null;
                 switch (item.getItemId())
                 {
-                    case R.id.home:
-                        temp = new HomeFragment();
+                    case R.id.gallery:
+                        temp = new UserFragment();
+                        Log.e("her1", String.valueOf(item.getItemId()));
                         break;
                     case R.id.collection :
                         temp = new CollectionFragment();
+                        Log.e("her1", String.valueOf(item.getItemId()));
                         break;
                     case R.id.cart :
                         temp = new CartFragment();
+                        Log.e("her1", String.valueOf(item.getItemId()));
                         break;
-                    case R.id.gallery:
-                        temp = new UserFragment();
+                    case R.id.home:
+                        temp = new HomeFragment();
+                        Log.e("her1", String.valueOf(item.getItemId()));
+
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_container_home, temp).commit();
                 return true;
