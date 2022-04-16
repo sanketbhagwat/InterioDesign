@@ -11,6 +11,7 @@ import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -23,6 +24,7 @@ public class ProductFragment extends Fragment {
     ImageView product_image;
     Button showAR_button,show3D_button,addToCartButton;
     DatabaseReference databaseReference;
+    boolean isCheckFav=false;
 
 
     public ProductFragment() {
@@ -85,6 +87,23 @@ public class ProductFragment extends Fragment {
                 productObject.setTexture(sample);
                // firebaseData.addToRecentlyViewedList(FirebaseAuth.getInstance().getUid(),productObject);
                 firebaseData.addToCartList(FirebaseAuth.getInstance().getUid(),productObject);
+            }
+        });
+
+        LottieAnimationView lottieAnimationView=view.findViewById(R.id.favIcon);
+        lottieAnimationView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isCheckFav){
+                    lottieAnimationView.setSpeed(-1);
+                    lottieAnimationView.playAnimation();
+                    isCheckFav=false;
+                }else {
+                    lottieAnimationView.setSpeed(1);
+                    lottieAnimationView.playAnimation();
+                    isCheckFav=true;
+
+                }
             }
         });
 
